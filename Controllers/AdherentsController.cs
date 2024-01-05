@@ -153,5 +153,12 @@ namespace FrontOfficeApp.Controllers
         {
             return _context.Adherents.Any(e => e.AdherentID == id);
         }
+
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
     }
 }
