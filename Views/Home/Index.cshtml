@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Home page";
 }
 
@@ -9,7 +8,10 @@
 
 <h2>Quick Links</h2>
 <ul>
-    <li><a asp-page="/Books">Manage Books</a></li>
-    <li><a asp-page="/Authors">Manage Authors</a></li>
-    <li><a asp-page="/Borrowers">Manage Borrowers</a></li>
+    <li><a asp-controller="Books" asp-action="Index">Manage Books</a></li>
+    <li><a asp-controller="Authors" asp-action="Index">Manage Authors</a></li>
+    <li><a asp-controller="Borrowers" asp-action="Index">Manage Borrowers</a></li>
 </ul>
+
+<!-- Log In Button -->
+<a asp-controller="Adherents" asp-action="Index" class="btn btn-primary">Log In</a>

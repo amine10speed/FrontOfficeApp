@@ -10,6 +10,14 @@ namespace FrontOfficeApp.Data
 {
     public class BibliothequeContext : DbContext
     {
+
+
+        public BibliothequeContext(DbContextOptions<BibliothequeContext> options)
+            : base(options)
+        {
+        }
+
+
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Employe> Employes { get; set; }
         public DbSet<Adherent> Adherents { get; set; }

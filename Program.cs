@@ -1,4 +1,10 @@
+using FrontOfficeApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<BibliothequeContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Server=localhost\\SQLEXPRESS;Database=Bibliotheque;Trusted_Connection=True;Encrypt=False;")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
