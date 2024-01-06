@@ -155,10 +155,7 @@ namespace FrontOfficeApp.Controllers
         }
 
 
-        public IActionResult Login()
-        {
-            return View();
-        }
+        
 
     }
 }
