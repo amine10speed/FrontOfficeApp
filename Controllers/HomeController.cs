@@ -10,5 +10,11 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    public IActionResult OurBooks()
+    {
+        return View();
+    }
+    
 }
 
