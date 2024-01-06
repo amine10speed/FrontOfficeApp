@@ -391,10 +391,10 @@ ul.top_icon li a{ color: #fff;
 
 
  .menu-area-main li:hover a, .menu-area-main li:focus a {
-     color: #b32137;
+     color: #ce921d;
 }
  .menu-area-main li.active a {
-     color: #b32137;
+     color: #ce921d;
 }
  .right_cart_section {
      float: right;
@@ -1460,7 +1460,7 @@ ul.locat_icon li a{
      padding: 0px 0px 20px 0px;
      font-size: 50px;
      font-weight: bold;
-     color: #b32137;
+     color: #ce921d;
      line-height: 50px;
 }
 
@@ -1490,7 +1490,7 @@ ul.locat_icon li a{
      width: 200px;
      font-size: 17px;
      padding: 20px 0px;
-     background-color: #81256c;
+     background-color: #ce921d;
      color: #fff;
      display: inline-block;
      line-height: 20px;
@@ -1500,10 +1500,10 @@ ul.locat_icon li a{
 }
  .about .about-box a:hover {
     color: #fff;
-     background-color: #81256c;
+     background-color: #ce921d;
 }
 
-.border {border-radius: 30px; border: #81256c solid 2px !important; padding: 40px 40px;} 
+.border {border-radius: 30px; border: #ce921d solid 2px !important; padding: 40px 40px;} 
 
  .Library {
      background-color: #fff;
@@ -1517,7 +1517,7 @@ ul.locat_icon li a{
      padding: 0px 0px 20px 0px;
      font-size: 50px;
      font-weight: bold;
-     color: #b32137;
+     color: #ce921d;
      line-height: 50px;
 }
  
@@ -1527,7 +1527,7 @@ ul.locat_icon li a{
      line-height: 32px;
 }
 
-.bg {background-color: #81256c;}
+.bg {background-color: #e3b04b !important;}
 
 .Library-box {
     padding: 20px 0px 10px 0px;
@@ -1545,7 +1545,7 @@ ul.locat_icon li a{
      width: 200px;
      font-size: 17px;
      padding: 20px 0px;
-     background-color: #81256c;
+     background-color: #ce921d;
      color: #fff;
      display: inline-block;
      line-height: 20px;
@@ -1569,7 +1569,7 @@ ul.locat_icon li a{
      padding: 0px 0px 20px 0px;
      font-size: 50px;
      font-weight: bold;
-     color: #b32137;
+     color: #ce921d;
      line-height: 50px;
 }
  
@@ -1649,9 +1649,9 @@ text-align: center;
 }
 .send-btn {
     font-size: 20px;
-    border: #81256c solid 2px;
+    border: #ce921d solid 2px;
     padding: 7px 69px;
-    background-color: #81256c;
+    background-color: #ce921d;
     color: #fff;
     margin-left: 15px;
     margin-top: 20px;
@@ -1666,7 +1666,7 @@ border: #fff solid 2px;
 color: #000;
 }
  .footer {
-     background: url(../images/footer-bg.jpg);
+    background-color: #ce921d;
      padding-bottom: 35px;
      background-size: 100% 100%;
 background-repeat: no-repeat;
@@ -1758,14 +1758,14 @@ ul.location_icon li a{
     color: #120f0f;
 }
  .copyright a:hover {
-    color: #81256c;
+    color: #ce921d;
 }
 /*--------------------------------------------------------------------- inner_page css ---------------------------------------------------------------------*/
  .about_page .about {
     margin-bottom: 90px;
 }
  .about-bg {
-    background-color: #b32137;
+    background-color: #ce921d;
 
 
 
