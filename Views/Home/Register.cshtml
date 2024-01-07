@@ -1,6 +1,5 @@
-﻿
-@{
-    ViewData["Title"] = "Login";
+﻿@{
+	ViewData["Title"] = "Register";
 }
 
 <!doctype html>
@@ -22,28 +21,63 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Login</h2>
+					<h2 class="heading-section">Register</h2>
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<div class="col-md-12 col-lg-10">
-					<div class="wrap d-md-flex">
-						<div class="img" style="background-image: url(/login/images/books.webp);">
+				<div class="col-md-12 col-lg-12">
+					<div class="wrap d-md-flex p-5">
+						<div class="img" style="background-image: url(/login/images/register.png);">
 						</div>
 						<div class="login-wrap p-4 p-md-5">
 							<div class="d-flex">
 								<div class="w-100">
-									<h3 class="mb-4">Sign In</h3>
+									<h3 class="mb-4">Sign Up</h3>
 								</div>
 							</div>
-							<form class="signin-form">
+							<form class="signup-form">
+								<div class="row">
+									<div class="col-6">
+										<div class="form-group mb-3">
+											<label class="label" for="Fname">Firstname</label>
+											<input id="Fname" type="text" name="Fname" class="form-control" placeholder="Firstname" required>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="form-group mb-3">
+											<label class="label" for="Fname">Firstname</label>
+											<input id="Fname" type="text" name="Fname" class="form-control" placeholder="Firstname" required>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-6">
+										<div class="form-group mb-3">
+											<label class="label" for="username">Username</label>
+											<input id="username" type="text" name="username" class="form-control" placeholder="Username" required>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="form-group mb-3">
+											<label class="label" for="adress">Adress</label>
+											<input id="adress" type="text" name="adress" class="form-control" placeholder="Ville" required>
+										</div>
+									</div>
+								</div>
+								
+								
+								
 								<div class="form-group mb-3">
 									<label class="label" for="name">Email</label>
 									<input type="email" class="form-control" placeholder="Email" required>
 								</div>
 								<div class="form-group mb-3">
 									<label class="label" for="password">Password</label>
-									<input type="password" class="form-control" placeholder="Password" required>
+									<input id="password" type="password" name="password" class="form-control" placeholder="Password" required>
+								</div>
+								<div class="form-group mb-3">
+									<label class="label" for="ConfirmPassword">Confirm Password</label>
+									<input id="ConfirmPassword" type="password" name="ConfirmPassword" class="form-control" placeholder="Confirm Password" required>
 								</div>
 								<div class="form-group">
 									<button asp-controller="Home" asp-action="Index" type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
@@ -63,7 +97,8 @@
 								</div>
 								-->
 							</form>
-							<p class="text-center">Not a member? <a asp-controller="Home" asp-action="Register"  >Sign Up</a></p>
+							<p class="text-center">Already member? <a asp-controller="Home" asp-action="Login">Sign In</a></p>
+
 						</div>
 					</div>
 				</div>
