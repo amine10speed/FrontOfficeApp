@@ -28,10 +28,30 @@ namespace FrontOfficeApp.Controllers
         }
 
         // GET BORROW BOOKS 
-        public IActionResult BorrowBooks()
+        // GET: Adherents/BorrowBooks
+        public async Task<IActionResult> BorrowBooks()
         {
-            return View();
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "AdherentID")?.Value;
+
+            if (!int.TryParse(userId, out int adherentId))
+            {
+                // Handle the case where user ID is not found or invalid
+                return RedirectToAction("Index", "Home");
+            }
+
+            var emprunts = await _context.Emprunts
+                .Where(e => e.AdherentID == adherentId)
+                .Include(e => e.Livre) // Assuming Emprunt has a navigation property to Livre
+                .ToListAsync();
+
+            return View(emprunts); // Pass the list of emprunts to the BorrowBooks view
         }
+
 
         // GET RESERVATIONS BOOKS 
         public IActionResult ReservationBooks()

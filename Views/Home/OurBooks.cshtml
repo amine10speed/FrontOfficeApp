@@ -19,6 +19,12 @@
                     var modalId = $"exampleModal{livre.ISBN}";
                     var borrowDate = DateTime.Today;
                     var returnDate = borrowDate.AddDays(14);
+                    var modalId2 = $"reserveModal{livre.ISBN}";
+                    var reservationDate = DateTime.Today;
+
+
+                    var firstAvailableReturnDate = DateTime.Today.AddDays(30); // Example placeholder value
+
 
                     <div class="col-4 p-2 mb-5">
                         <div class="card">
@@ -92,17 +98,41 @@
                                 }
                                 else if (livre.Quantite == 0)
                                 {
-                                    if (User.Identity.IsAuthenticated)
-                                    {
-                                        <form asp-controller="Reservations" asp-action="Create" method="post">
-                                            <input type="hidden" name="ISBN" value="@livre.ISBN" />
-                                            <button type="submit" class="btn btn-info my-3">Reserve book</button>
-                                        </form>
-                                    }
-                                    else
-                                    {
-                                        <a asp-controller="Home" asp-action="Login" class="btn btn-info my-3">Reserve book</a>
-                                    }
+                                    <button type="button" class="btn btn-info my-3" data-toggle="modal" data-target="#@modalId2">
+                                        Reserve book
+                                    </button>
+
+                                    <!-- Reservation Modal -->
+                                    <div class="modal fade" id="@modalId2" tabindex="-1" role="dialog" aria-labelledby="reserveModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="reserveModalLabel">Reserve @livre.Titre</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Reservation Date: @reservationDate.ToShortDateString()</p>
+                                                    <p>Expected Retrieval Date: @firstAvailableReturnDate.ToShortDateString()</p>
+                                                    <!-- Add additional reservation details here -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    @if (User.Identity.IsAuthenticated)
+                                                    {
+                                                        <form asp-controller="Reservations" asp-action="AddReservation" method="post">
+                                                            <input type="hidden" name="ISBN" value="@livre.ISBN" />
+                                                            <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+                                                        </form>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a asp-controller="Home" asp-action="Login" class="btn btn-primary">Login to Reserve</a>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 }
                             </div>
                         </div>
