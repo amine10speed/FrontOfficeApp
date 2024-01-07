@@ -1452,7 +1452,14 @@ ul.locat_icon li a{
      background-position: center center;
      padding: 90px 0px;
 }
- .aboutheading {
+.borrow {
+    /* background: url(../images/about-bg.jpg); */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 120px 0px;
+}
+.aboutheading {
     text-align: center;
     padding-bottom: 50px;
 }

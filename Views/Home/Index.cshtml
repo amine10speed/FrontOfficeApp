@@ -33,10 +33,11 @@
 </head>
 <!-- body -->
 <body class="main-layout home_page">
-    
+
     <!-- header -->
     <header>
         <!-- header inner -->
+
         <div class="header">
             <div class="container">
                 <div class="row">
@@ -49,31 +50,43 @@
                     </div>
                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
                         <div class="menu-area">
-                            <div class="limit-box">
-                                <nav class="main-menu">
-                                    <ul class="menu-area-main">
-                                        <li class="active"> <a asp-controller="Home" asp-action="Index" >Home</a> </li>
-                                        <li><a asp-controller="Home" asp-action="OurBooks">Our Books</a></li>
+                            <nav class="main-menu navbar navbar-expand-lg">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item active"> <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a> </li>
+                                        <li class="nav-item"> <a class="nav-link" asp-controller="Home" asp-action="OurBooks">Our Books</a> </li>
+                                        <li class="nav-item"> <a class="nav-link" asp-controller="Adherents" asp-action="BorrowBooks">Books Borrow</a> </li>
+                                        <li class="nav-item"> <a class="nav-link" asp-controller="Adherents" asp-action="ReservationBooks">Books Reservations</a> </li>
 
-                                        <li><a asp-controller="Home" asp-action="OurBooks"> * </a></li>
-
-                                        
-                                        <li><a asp-controller="Home" asp-action="OurBooks">Books Borrow</a></li>
-                                        <li><a asp-controller="Home" asp-action="OurBooks">Books Reservations</a></li>
-
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Dropdown
+                                            </a>
+                                            <div class="dropdown-menu position-static" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" class="nav-link" asp-controller="Adherents" asp-action="Profils">
+                                                    <span class="text-dark">Profil</span>
+                                                </a>
+                                                <a class="dropdown-item" class="nav-link" asp-controller="Adherents" asp-action="Logout">
+                                                    <span class="text-dark">Logout</span>
+                                                </a>
+                                            </div>
+                                        </li>
 
                                         <li class="mean-last"> <a asp-controller="Home" asp-action="Login" class=""><img src="images/top-icon.png" alt="#" /></a> </li>
                                     </ul>
-                                </nav>
-                            </div>
+                                </div>
+                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- end header inner -->
     </header>
+
     <!-- end header -->
     <section class="slider_section">
         <div id="myCarousel" class="carousel slide banner-main" data-ride="carousel">
@@ -152,7 +165,7 @@
                 <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12">
                     <div class="about-box">
                         <p> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                        
+
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
@@ -236,7 +249,6 @@
         </div>
     </div>
     <!-- end Books -->
-
     <!-- footer -->
     <footer>
         <div class="footer">
@@ -279,9 +291,10 @@
     <!-- sidebar -->
     <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/custom.js"></script>
+  
 </body>
 </html>
 
-<!-- Log In Button 
+<!-- Log In Button
 <a asp-controller="Adherents" asp-action="Index" class="btn btn-primary">Log In</a>
 -->

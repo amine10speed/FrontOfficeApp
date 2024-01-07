@@ -25,6 +25,32 @@ namespace FrontOfficeApp.Controllers
             return View(await _context.Adherents.ToListAsync());
         }
 
+        // GET BORROW BOOKS 
+        public IActionResult BorrowBooks()
+        {
+            return View();
+        }
+
+        // GET RESERVATIONS BOOKS 
+        public IActionResult ReservationBooks()
+        {
+            return View();
+        }
+
+        // GET profil BOOKS 
+        public IActionResult Profils()
+        {
+            return View();
+        }
+
+        public IActionResult Logout()
+        {
+            // Assuming HomeController is the correct name of your controller
+            return RedirectToAction("Login", "Home");
+        }
+
+
+
         // GET: Adherents/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -1,5 +1,166 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Borrow books";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Borrow books</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="/css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="/images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+<body class="main-layout home_page">
+
+    <!-- header -->
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                    <div class="full">
+                        <div class="center-desk">
+                            <div class="logo"> <a asp-controller="Home" asp-action="Index"><img src="images/logo.png" alt="#"></a> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                    <div class="menu-area">
+                        <nav class="main-menu navbar navbar-expand-lg">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item active"> <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a> </li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="Home" asp-action="OurBooks">Our Books</a> </li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="Adherents" asp-action="BorrowBooks">Books Borrow</a> </li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="Adherents" asp-action="ReservationBooks">Books Reservations</a> </li>
+
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Dropdown
+                                        </a>
+                                        <div class="dropdown-menu position-static" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" class="nav-link" asp-controller="Adherents" asp-action="Profils">
+                                                <span class="text-dark">Profil</span>
+                                            </a>
+                                            <a class="dropdown-item" class="nav-link" asp-controller="Adherents" asp-action="Logout">
+                                                <span class="text-dark">Logout</span>
+                                            </a>
+                                        </div>
+                                    </li>
+
+                                    <li class="mean-last"> <a asp-controller="Home" asp-action="Login" class=""><img src="images/top-icon.png" alt="#" /></a> </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+    <div class="borrow mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="aboutheading">
+                        <h2>Borrow <strong class="black">Books</strong></h2>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                        <th class="col-1" scope="col">#</th>
+                        <th class="col-7" scope="col">Books name</th>
+                        <th class="col-2" scope="col">Borrow date</th>
+                        <th class="col-2" scope="col">Return date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row pdn-top-30">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                        <div class="Follow">
+                            <h3>Follow Us</h3>
+                        </div>
+                        <ul class="location_icon">
+                            <li> <a href="#"><img src="/icon/facebook.png"></a></li>
+                            <li> <a href="#"><img src="/icon/Twitter.png"></a></li>
+                            <li> <a href="#"><img src="/icon/linkedin.png"></a></li>
+                            <li> <a href="#"><img src="/icon/instagram.png"></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+                        <div class="Follow">
+                            <h3>Newsletter</h3>
+                        </div>
+                        <input class="Newsletter" placeholder="Enter your email" type="Enter your email">
+                        <button class="Subscribe">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <p>Copyright 2024 All Right Reserved By SAW </p>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!-- Javascript files-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery-3.0.0.min.js"></script>
+    <script src="/js/plugin.js"></script>
+    <!-- sidebar -->
+    <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/js/custom.js"></script>
+</body>
+</html>
+
+<!-- Log In Button
+<a asp-controller="Adherents" asp-action="Index" class="btn btn-primary">Log In</a>
+-->
