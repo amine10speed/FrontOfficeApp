@@ -48,6 +48,11 @@ namespace FrontOfficeApp.Controllers
        
 
 
+        
+
+
+
+
         // GET: Adherents/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -72,21 +77,11 @@ namespace FrontOfficeApp.Controllers
             return View();
         }
 
-        // POST: Adherents/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdherentID,NomUtilisateur,MotDePasse,Nom,Prenom,Adresse,Email")] Adherent adherent)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(adherent);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(adherent);
-        }
+		// POST: Adherents/Create
+		// To protect from overposting attacks, enable the specific properties you want to bind to.
+		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+		
 
         // GET: Adherents/Edit/5
         public async Task<IActionResult> Edit(int? id)

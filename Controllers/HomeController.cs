@@ -30,9 +30,34 @@ public class HomeController : Controller
     {
         return View();
     }
+	public IActionResult Register()
+	{
+		return View();
+	}
 
 
-    [HttpPost]
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> Register(
+	[Bind("NomUtilisateur,MotDePasse,Nom,Prenom,Adresse,Email")] Adherent adherent,
+	string ConfirmPassword)
+	{
+		if (ModelState.IsValid)
+		{
+			if (adherent.MotDePasse != ConfirmPassword)
+			{
+				ModelState.AddModelError("ConfirmPassword", "The password and confirmation password do not match.");
+				return View(adherent); // Return to the view with the model to show the error
+			}
+
+			_context.Add(adherent);
+			await _context.SaveChangesAsync();
+			return RedirectToAction(nameof(Login));
+		}
+		return View(adherent); // Return the model with validation errors if any
+	}
+
+	[HttpPost]
     public async Task<IActionResult> Login(string email, string password)
     {
         // Vérifiez les informations d'identification de l'utilisateur.
