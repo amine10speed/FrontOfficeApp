@@ -32,17 +32,19 @@ namespace FrontOfficeApp.Controllers
             if (livre == null || livre.Quantite <= 0)
             {
                 // Handle the case where the book doesn't exist or there are no copies left to borrow
-                return View("Error"); // Replace with your error view
+                return RedirectToAction("OurBooks", "Home"); // Redirect to the books list page or an error page
             }
-
-            // Decrement the quantity of the book
-            livre.Quantite--;
+            else if(livre != null || livre.Quantite > 0) {
+                // Decrement the quantity of the book
+                livre.Quantite--;
+            }
+            
 
             var userId = User.Claims.FirstOrDefault(c => c.Type == "AdherentID")?.Value; // Adjust the claim type if necessary
 
             var emprunt = new Emprunt
             {
-                AdherentID = int.Parse(userId),
+                AdherentID = int.TryParse(userId, out var id) ? id : 0,
                 ISBN = ISBN,
                 DateEmprunt = DateTime.Now,
                 DateRetourPrevu = DateTime.Now.AddDays(14), // Adjust the number of days as necessary
@@ -51,9 +53,8 @@ namespace FrontOfficeApp.Controllers
             _context.Emprunts.Add(emprunt);
             await _context.SaveChangesAsync();
 
-           
-
             return RedirectToAction("OurBooks", "Home"); // Redirect to the books list page
         }
+
     }
 }

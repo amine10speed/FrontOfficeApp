@@ -34,12 +34,7 @@ public class HomeController : Controller
         return View();
     }
    
-    {
-        return View();
-    }
-    {
-        return View();
-    }
+   
 	public IActionResult Register()
 	{
 		return View();

@@ -11,7 +11,7 @@
     <!-- header -->
     @Html.Partial("_Header");
     <!-- end header -->
-    <div class="about mt-5">
+    <div class="about mt-5 mb-5">
         <div class="container">
             <div class="row">
                 @foreach (var livre in Model)
@@ -20,7 +20,7 @@
                     var borrowDate = DateTime.Today;
                     var returnDate = borrowDate.AddDays(14);
 
-                    <div class="col-4 p-2">
+                    <div class="col-4 p-2 mb-5">
                         <div class="card">
                             <img src="@livre.WebFriendlyImageCoverUrl" class="card-img-top img-fluid" alt=" @livre.Titre" style=" width: 100%;height: 200px; object-fit: cover;">
                             <div class="card-body">
@@ -30,6 +30,7 @@
                                 <p class="card-text">ISBN: @livre.ISBN</p>
                                 <p class="card-text">Quantity: @livre.Quantite</p>
                             </div>
+
                             <div class="card-footer">
                                 @if (livre.Quantite > 0)
                                 {
@@ -89,7 +90,7 @@
                                         <a asp-controller="Home" asp-action="Login" class="btn btn-warning my-3">Borrow book</a>
                                     }
                                 }
-                                else
+                                else if (livre.Quantite == 0)
                                 {
                                     if (User.Identity.IsAuthenticated)
                                     {
