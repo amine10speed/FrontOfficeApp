@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontOfficeApp.Data;
 using FrontOfficeApp.Models;
+using Microsoft.AspNetCore.Http;
+
 
 namespace FrontOfficeApp.Controllers
 {
@@ -43,11 +45,7 @@ namespace FrontOfficeApp.Controllers
             return View();
         }
 
-        public IActionResult Logout()
-        {
-            // Assuming HomeController is the correct name of your controller
-            return RedirectToAction("Login", "Home");
-        }
+       
 
 
 

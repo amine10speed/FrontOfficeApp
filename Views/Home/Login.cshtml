@@ -36,33 +36,23 @@
 									<h3 class="mb-4">Sign In</h3>
 								</div>
 							</div>
-							<form class="signin-form">
+							<form asp-action="Login" class="signin-form">
 								<div class="form-group mb-3">
 									<label class="label" for="name">Email</label>
-									<input type="email" class="form-control" placeholder="Email" required>
+									<input type="email" name="email" class="form-control" placeholder="Email" required>
 								</div>
 								<div class="form-group mb-3">
 									<label class="label" for="password">Password</label>
-									<input type="password" class="form-control" placeholder="Password" required>
+									<input type="password" name="password" class="form-control" placeholder="Password" required>
 								</div>
 								<div class="form-group">
-									<button asp-controller="Home" asp-action="Index" type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
+									<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
 								</div>
-								<!--
-								<div class="form-group d-md-flex">
-									<div class="w-50 text-left">
-										<label class="checkbox-wrap checkbox-primary mb-0">
-											Remember Me
-											<input type="checkbox" checked>
-											<span class="checkmark"></span>
-										</label>
-									</div>
-									<div class="w-50 text-md-right">
-										<a href="#">Forgot Password</a>
-									</div>
-								</div>
-								-->
 							</form>
+							@if (ViewData["ErrorMessage"] != null)
+							{
+								<div>@ViewData["ErrorMessage"]</div>
+							}
 							<p class="text-center">Not a member? <a asp-controller="Home" asp-action="Register"  >Sign Up</a></p>
 						</div>
 					</div>
@@ -78,4 +68,5 @@
 
 </body>
 </html>
+
 
