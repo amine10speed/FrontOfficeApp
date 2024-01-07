@@ -21,6 +21,18 @@ public class HomeController : Controller
         return View();
     }
 
+    public async Task<IActionResult> OurBooksSearch(string search)
+    {
+        var query = _context.Livres.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            query = query.Where(l => EF.Functions.Like(l.Titre, $"%{search}%"));
+        }
+
+        var livres = await query.ToListAsync();
+        return View("OurBooks", livres);
+    }
 
     public async Task<IActionResult> OurBooks()
     {

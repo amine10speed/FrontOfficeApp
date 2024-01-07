@@ -42,3 +42,12 @@
 <!-- sidebar -->
 <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/js/custom.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable({
+            "searching": true // this will enable the search function
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

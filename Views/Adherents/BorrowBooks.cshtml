@@ -18,38 +18,39 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered">
-                @foreach (var emprunts in Model)
-                {
-                    <h5 class="card-title">@emprunts.Livre.Titre</h5>
-                }
-                    <thead>
-                        <tr>
+            <table id="dtBasicExample" class="table table-bordered table-striped table-sm" cellspacing="0">
+                <thead>
+                    <tr>
                         <th class="col-1" scope="col">#</th>
-                        <th class="col-7" scope="col">Books name</th>
-                        <th class="col-2" scope="col">Borrow date</th>
-                        <th class="col-2" scope="col">Return date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                        <th class="col-7" scope="col">Book's Name</th>
+                        <th class="col-2" scope="col">Borrow Date</th>
+                        <th class="col-2" scope="col">Return Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1; // Counter for row numbers
+                    }
+                    @foreach (var emprunt in Model)
+                    {
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td></td>
+                            <th scope="row">@i</th>
+                            <td>@emprunt.Livre.Titre</td> <!-- Assuming 'Livre' is the related book entity -->
+                            <td>@emprunt.DateEmprunt.ToString("d")</td> <!-- Formatting the date assuming 'DateEmprunt' is a DateTime -->
+                            <td>@emprunt.DateRetourPrevu.ToString("d")</td> <!-- Formatting the date assuming 'DateRetourPrevu' is a DateTime -->
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+                        i++; // Increment the counter after each row is written
+                    }
+                </tbody>
+            </table>
+
         </div>
     </div>
     <!-- footer -->
     @Html.Partial("_Footer")
+    
+
+    
 </body>
 </html>
 
