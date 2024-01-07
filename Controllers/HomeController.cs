@@ -21,6 +21,13 @@ public class HomeController : Controller
         return View();
     }
 
+
+    public async Task<IActionResult> OurBooks()
+    {
+        var livres = await _context.Livres.ToListAsync();
+        return View(livres); // Pass the list of books to the view
+    }
+
     [HttpGet]
     public IActionResult Login()
     {

@@ -84,93 +84,30 @@
     <div class="about mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <div class="aboutheading">
-                        <h2>Our <strong class="black">Books</strong></h2>
-                        <form class="d-flex">
-                            <input class="form-control col-12 bg-transparent border border-warning" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-warning my-2 my-sm-0 text-dark mx-2" type="submit">Search</button>
-                            </form>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-               <div class="col-4 p-2">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <a href="#" class="btn btn-warning my-3">Borrow book</a>
-                    </div>
-                </div>
-                <div class="col-4 p-2">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
+                @foreach (var livre in Model)
+                {
+                    <div class="col-4 p-2">
+                        <div class="card">
+                            <img src="@livre.WebFriendlyImageCoverUrl" class="card-img-top" alt="@livre.Titre">
+                            <div class="card-body">
+                                <h5 class="card-title">@livre.Titre</h5>
+                                <p class="card-text">Author: @livre.Auteur</p>
+                                <p class="card-text">Year: @livre.AnneePublication</p>
+                                <p class="card-text">ISBN: @livre.ISBN</p>
+                                <p class="card-text">Quantity: @livre.Quantite</p>
+                            </div>
+                            <div class="card-footer">
+                                @if (User.Identity.IsAuthenticated){
+                                    <a href="#" class="btn btn-warning my-3">Borrow book</a>
+                                }
+                                else {
+                                    <a asp-controller="Home" asp-action="Login" class="btn btn-warning my-3">Borrow book</a>
+                                }
+                                
+                            </div>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <a href="#" class="btn btn-warning my-3">Borrow book</a>
-                    </div>
-                </div>
-                <div class="col-4 p-2">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <a href="#" class="btn btn-warning my-3">Borrow book</a>
-                    </div>
-                </div>
-                <div class="col-4 p-2">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <a href="#" class="btn btn-warning my-3">Borrow book</a>
-                    </div>
-                </div>
-                <div class="col-4 p-2">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <a href="#" class="btn btn-warning my-3">Borrow book</a>
-                    </div>
-                </div>
-                
+                }
             </div>
         </div>
     </div>
