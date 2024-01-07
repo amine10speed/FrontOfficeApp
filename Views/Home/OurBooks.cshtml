@@ -16,6 +16,10 @@
             <div class="row">
                 @foreach (var livre in Model)
                 {
+                    var modalId = $"exampleModal{livre.ISBN}";
+                    var borrowDate = DateTime.Today;
+                    var returnDate = borrowDate.AddDays(14);
+
                     <div class="col-4 p-2">
                         <div class="card">
                             <img src="@livre.WebFriendlyImageCoverUrl" class="card-img-top" alt="@livre.Titre">
@@ -27,19 +31,83 @@
                                 <p class="card-text">Quantity: @livre.Quantite</p>
                             </div>
                             <div class="card-footer">
-                                @if (User.Identity.IsAuthenticated){
-                                    <a href="#" class="btn btn-warning my-3">Borrow book</a>
+                                @if (livre.Quantite > 0)
+                                {
+                                    if (User.Identity.IsAuthenticated)
+                                    {
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#@modalId">
+                                            Borrow book
+                                        </button>
+                                        <!-- Modal code goes here -->
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title text-dark" id="exampleModalLabel">Borrow @livre.Titre</h5>
+                                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <form asp-controller="Emprunts" asp-action="AddEmprunt" method="post">
+                                                        <div class="modal-body">
+                                                            <div class="form-group row">
+                                                                <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm fw-bold">
+                                                                    Book Title
+                                                                </label>
+                                                                <div class="col-sm-6">
+                                                                    <p>@livre.Titre</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm fw-bold">
+                                                                    Borrow Date
+                                                                </label>
+                                                                <div class="col-sm-6">
+                                                                    <p>@borrowDate.ToShortDateString()</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm fw-bold">
+                                                                    Expected Return Date
+                                                                </label>
+                                                                <div class="col-sm-6">
+                                                                    <p>@returnDate.ToShortDateString()</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                                                            <input type="hidden" name="ISBN" value="@livre.ISBN" />
+                                                            <button type="submit" class="btn btn-warning my-3">Confirm Borrow</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Home" asp-action="Login" class="btn btn-warning my-3">Borrow book</a>
+                                    }
                                 }
-                                else {
-                                    <a asp-controller="Home" asp-action="Login" class="btn btn-warning my-3">Borrow book</a>
+                                else
+                                {
+                                    if (User.Identity.IsAuthenticated)
+                                    {
+                                        <form asp-controller="Reservations" asp-action="Create" method="post">
+                                            <input type="hidden" name="ISBN" value="@livre.ISBN" />
+                                            <button type="submit" class="btn btn-info my-3">Reserve book</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Home" asp-action="Login" class="btn btn-info my-3">Reserve book</a>
+                                    }
                                 }
-                                
                             </div>
                         </div>
                     </div>
                 }
             </div>
-        </div>
     </div>
     <!-- footer -->
     @Html.Partial("_Footer");
