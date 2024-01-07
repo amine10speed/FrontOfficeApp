@@ -2,6 +2,26 @@
     ViewData["Title"] = "Our books";
 }
 
+@if (TempData["Success"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            // Affiche un message de succès
+            alert('@TempData["Success"]');
+        };
+    </script>
+}
+
+@if (TempData["Error"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            // Affiche un message d'erreur
+            alert('@TempData["Error"]');
+        };
+    </script>
+}
+
 <!DOCTYPE html>
 <html lang="en">
 

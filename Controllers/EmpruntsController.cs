@@ -26,37 +26,54 @@ namespace FrontOfficeApp.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
+            var userIdString = User.Claims.FirstOrDefault(c => c.Type == "AdherentID")?.Value;
+            if (!int.TryParse(userIdString, out var userId))
+            {
+                // Handle the error if the user ID claim is not found or cannot be parsed
+                return RedirectToAction("OurBooks", "Home");
+            }
+
             var livre = await _context.Livres
                 .FirstOrDefaultAsync(l => l.ISBN == ISBN);
 
             if (livre == null || livre.Quantite <= 0)
             {
                 // Handle the case where the book doesn't exist or there are no copies left to borrow
-                return RedirectToAction("OurBooks", "Home"); // Redirect to the books list page or an error page
+                TempData["Error"] = "This book is not available.";
+                return RedirectToAction("OurBooks", "Home");
             }
-            else if(livre != null || livre.Quantite > 0) {
-                // Decrement the quantity of the book
-                livre.Quantite--;
-            }
-            
 
-            var userId = User.Claims.FirstOrDefault(c => c.Type == "AdherentID")?.Value; // Adjust the claim type if necessary
+            // Check if the user has already borrowed this book and not returned it
+            var existingEmprunt = await _context.Emprunts
+                .AnyAsync(e => e.ISBN == ISBN && e.AdherentID == userId && e.DateRetourReel == null);
+
+            if (existingEmprunt)
+            {
+                // If the user has already borrowed this book, do not allow another borrow
+                TempData["Error"] = "You have already borrowed this book.";
+                return RedirectToAction("OurBooks", "Home");
+            }
+
+            // Decrement the quantity of the book
+            livre.Quantite--;
 
             var emprunt = new Emprunt
             {
-                AdherentID = int.TryParse(userId, out var id) ? id : 0,
+                AdherentID = userId,
                 ISBN = ISBN,
                 DateEmprunt = DateTime.Now,
-                DateRetourPrevu = DateTime.Now.AddDays(14), // Adjust the number of days as necessary
+                DateRetourPrevu = DateTime.Now.AddDays(14), // Set the return date to 14 days from now
             };
 
             _context.Emprunts.Add(emprunt);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("OurBooks", "Home"); // Redirect to the books list page
+            TempData["Success"] = "You have successfully borrowed the book.";
+            return RedirectToAction("OurBooks", "Home");
         }
 
-        
+
+
 
     }
 }
