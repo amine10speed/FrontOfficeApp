@@ -34,6 +34,12 @@ public class HomeController : Controller
         return View();
     }
    
+    {
+        return View();
+    }
+    {
+        return View();
+    }
 	public IActionResult Register()
 	{
 		return View();
@@ -51,7 +57,7 @@ public class HomeController : Controller
 			if (adherent.MotDePasse != ConfirmPassword)
 			{
 				ModelState.AddModelError("ConfirmPassword", "The password and confirmation password do not match.");
-				return View(adherent); // Return to the view with the model to show the error
+				return RedirectToAction("Register", "Home"); // Return to the view with the model to show the error
 			}
 
 			_context.Add(adherent);
