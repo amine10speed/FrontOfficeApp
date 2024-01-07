@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home page";
 }
+@using Microsoft.AspNetCore.Http
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,14 +38,17 @@
     <!-- header -->
     <header>
         <!-- header inner -->
-
         <div class="header">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
                         <div class="full">
                             <div class="center-desk">
-                                <div class="logo"> <a asp-controller="Home" asp-action="Index"><img src="images/logo.png" alt="#"></a> </div>
+                                <div class="logo">
+                                    <a asp-controller="Home" asp-action="Index">
+                                        <img src="~/images/logo.png" alt="Logo" />
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -58,24 +62,28 @@
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active"> <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a> </li>
                                         <li class="nav-item"> <a class="nav-link" asp-controller="Home" asp-action="OurBooks">Our Books</a> </li>
-                                        <li class="nav-item"> <a class="nav-link" asp-controller="Adherents" asp-action="BorrowBooks">Books Borrow</a> </li>
-                                        <li class="nav-item"> <a class="nav-link" asp-controller="Adherents" asp-action="ReservationBooks">Books Reservations</a> </li>
-
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Dropdown
-                                            </a>
-                                            <div class="dropdown-menu position-static" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" class="nav-link" asp-controller="Adherents" asp-action="Profils">
-                                                    <span class="text-dark">Profil</span>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <li class="nav-item"> <a class="nav-link" asp-controller="Adherents" asp-action="BorrowBooks">Books Borrow</a> </li>
+                                            <li class="nav-item"> <a class="nav-link" asp-controller="Adherents" asp-action="ReservationBooks">Books Reservations</a> </li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Profile
                                                 </a>
-                                                <a class="dropdown-item" class="nav-link" asp-controller="Adherents" asp-action="Logout">
-                                                    <span class="text-dark">Logout</span>
+                                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <a class="dropdown-item" asp-controller="Adherents" asp-action="Profile">Profile</a>
+                                                    <a class="dropdown-item" asp-controller="Home" asp-action="Logout">Logout</a>
+                                                </div>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="nav-item">
+                                                <a asp-controller="Home" asp-action="Login">
+                                                    <img src="~/images/top-icon.png" alt="Login Icon" />
                                                 </a>
-                                            </div>
-                                        </li>
-
-                                        <li class="mean-last"> <a asp-controller="Home" asp-action="Login" class=""><img src="images/top-icon.png" alt="#" /></a> </li>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </nav>
@@ -86,6 +94,8 @@
         </div>
         <!-- end header inner -->
     </header>
+
+
 
     <!-- end header -->
     <section class="slider_section">
