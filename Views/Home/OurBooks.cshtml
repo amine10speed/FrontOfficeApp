@@ -11,8 +11,24 @@
     <!-- header -->
     @Html.Partial("_Header");
     <!-- end header -->
-    <div class="about mt-5 mb-5">
-        <div class="container">
+    
+
+    <div class="about mt-5">
+        <div class="container d-flex align-items-center">
+            <form class="row mx-auto">
+                <div class="col-lg-8">
+                    <input class="form-control me-2 bg-transparent border" id="customSearchBox" type="search" placeholder="Search" aria-label="Search">
+                </div>
+                <div class="col-lg-3 p-2">
+                    <button class="btn btn-outline-warning" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+       
+
+   
+        <div class="container mt-5">
+
             <div class="row">
                 @foreach (var livre in Model)
                 {
@@ -139,6 +155,10 @@
                     </div>
                 }
             </div>
+
+            
+    </div>
+
     </div>
     <!-- footer -->
     @Html.Partial("_Footer");
