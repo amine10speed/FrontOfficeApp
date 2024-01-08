@@ -6,6 +6,7 @@ using FrontOfficeApp.Models;
 using FrontOfficeApp.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using FrontOfficeApp.Controllers;
 
 public class HomeController : Controller
 {
@@ -37,8 +38,20 @@ public class HomeController : Controller
     public async Task<IActionResult> OurBooks()
     {
         var livres = await _context.Livres.ToListAsync();
-        return View(livres); // Pass the list of books to the view
+
+        foreach (var livre in livres)
+        {
+            var reservationsController = new ReservationsController(_context);
+            var nextAvailableDate = await reservationsController.CalculateNextAvailableDate(livre.ISBN);
+
+            // Assuming Livre model has a property to hold the next available date
+            // If not, you might need to extend your model or use a ViewModel
+            livre.NextAvailableDate = nextAvailableDate;
+        }
+
+        return View(livres); // Pass the list of books with their next available dates to the view
     }
+
 
     [HttpGet]
     public IActionResult Login()

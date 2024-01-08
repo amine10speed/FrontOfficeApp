@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using FrontOfficeApp.Data;
 using Microsoft.Extensions.FileProviders;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Ajoutez la prise en charge des sessions.
@@ -28,6 +29,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 // Ajoutez des services supplémentaires au conteneur.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
 
 var app = builder.Build();
 

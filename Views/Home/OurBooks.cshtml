@@ -70,9 +70,7 @@
                     var returnDate = borrowDate.AddDays(14);
                     var modalId2 = $"reserveModal{livre.ISBN}";
                     var reservationDate = DateTime.Today;
-
-
-                    var firstAvailableReturnDate = DateTime.Today.AddDays(30); // Example placeholder value
+                    var firstAvailableReturnDate = @livre.NextAvailableDate; 
 
 
                     <div class="col-4 p-2 mb-5">
