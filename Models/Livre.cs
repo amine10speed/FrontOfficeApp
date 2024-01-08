@@ -19,7 +19,9 @@ namespace FrontOfficeApp.Models
         public string ImageCouvertureUrl { get; set; }
 
         [NotMapped]
-       
+
+        public DateTime NextAvailableDate { get; set; }
+
         public string WebFriendlyImageCoverUrl
         {
             get

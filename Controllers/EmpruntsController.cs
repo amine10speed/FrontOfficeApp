@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using MailKit.Security;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace FrontOfficeApp.Controllers
 {
@@ -15,6 +18,23 @@ namespace FrontOfficeApp.Controllers
         public EmpruntsController(BibliothequeContext context)
         {
             _context = context;
+        }
+
+        public void SendEmail(string email, string subject, string messageBody)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("admin", "anouar7moussaoui@gmail.com"));
+            message.To.Add(new MailboxAddress("", email));
+            message.Subject = subject;
+            message.Body = new TextPart("plain") { Text = messageBody };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                client.Authenticate("anouar7moussaoui@gmail.com", "syod iyco hxtm hsrx");
+                client.Send(message);
+                client.Disconnect(true);
+            }
         }
 
         // Assuming you have a route setup to accept ISBN as a parameter for the book to be borrowed.
@@ -67,6 +87,17 @@ namespace FrontOfficeApp.Controllers
 
             _context.Emprunts.Add(emprunt);
             await _context.SaveChangesAsync();
+            
+            var adherent = await _context.Adherents.FindAsync(userId);
+        if (adherent != null)
+        {
+            SendEmail(
+                adherent.Email,
+                "Book Borrowed",
+                $"Dear {adherent.Prenom} {adherent.Nom}, you have borrowed the book '{livre.Titre}'. Please return it by {emprunt.DateRetourPrevu.ToShortDateString()}."
+            );
+        }
+
 
             TempData["Success"] = "You have successfully borrowed the book.";
             return RedirectToAction("OurBooks", "Home");
