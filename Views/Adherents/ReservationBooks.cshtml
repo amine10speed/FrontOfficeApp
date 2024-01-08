@@ -19,6 +19,10 @@
                     </div>
                 </div>
             </div>
+             @foreach (var reservation in Model)
+            {
+                <p>@reservation.Livre.Titre;</p>
+            }
             <table id="dtBasicExample" class="table table-bordered table-striped table-sm" cellspacing="0">
                 <thead>
                     <tr>
@@ -71,7 +75,7 @@
 
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-warning">Borrow</button>
+                                                <button type="submit" class="btn btn-warning" asp-controller="Adherents" asp-action="GetHTMLPageAsPdf">Borrow</button>
                                             </div>
                                         </form>
                                     </div>

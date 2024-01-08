@@ -4,14 +4,15 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>07c9b446-74db-4ab4-887f-c6256c90de55</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Adherents\Index.cshtml" />
     <Content Remove="Views\Adherents\Register.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IronPdf" Version="2023.12.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.0" />
@@ -21,6 +22,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
+    <PackageReference Include="Rotativa" Version="1.6.4" />
   </ItemGroup>
 
 </Project>

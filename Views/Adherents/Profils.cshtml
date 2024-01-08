@@ -20,10 +20,11 @@
                     </div>
                 </div>
             </div>
-            <form asp-action="UpdateAdherent" asp-controller="Adherents" class="border" method="post">
+            <form asp-action="UpdateAdherent" class="border" >
                 @Html.AntiForgeryToken()
 
                 <input type="hidden" name="AdherentID" value="@Model.AdherentID" />
+                
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="Fname" class="col-md-2 col-form-label">Firstname</label>
