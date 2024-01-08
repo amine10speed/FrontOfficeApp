@@ -9,6 +9,7 @@ using FrontOfficeApp.Data;
 using FrontOfficeApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Components.RenderTree;
+using System.Security.Claims;
 
 
 namespace FrontOfficeApp.Controllers
@@ -154,38 +155,50 @@ namespace FrontOfficeApp.Controllers
         // POST: Adherents/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost , ActionName("UpdateAdherent")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateAdherent([Bind("AdherentID,NomUtilisateur,Nom,Prenom,Adresse,Email")] Adherent adherent)
+        public async Task<IActionResult> UpdateAdherent(Adherent model)
         {
-            var userId = User.Claims.FirstOrDefault(c => c.Type == "AdherentID")?.Value;
+            if (!ModelState.IsValid)
+            {
+                // Return a view with the model to display form errors
+                return View(model);
+            }
 
-            if (!int.TryParse(userId, out int parsedUserId) || adherent.AdherentID != parsedUserId)
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (model.AdherentID.ToString() != currentUserId)
+            {
+                return Forbid();
+            }
+
+            var adherent = await _context.Adherents.FindAsync(model.AdherentID);
+            if (adherent == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            adherent.Prenom = model.Prenom;
+            adherent.Nom = model.Nom;
+            adherent.NomUtilisateur = model.NomUtilisateur;
+            adherent.Email = model.Email;
+            adherent.Adresse = model.Adresse;
+
+            try
             {
-                try
-                {
-                    _context.Update(adherent);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AdherentExists(adherent.AdherentID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
             }
-            return View("Profils", adherent); // Make sure this view can handle the adherent model
+            catch (DbUpdateConcurrencyException ex)
+            {
+                // Log the error
+                return StatusCode(500, "Unable to save changes due to a concurrency issue.");
+            }
+            catch (Exception ex)
+            {
+                // Log the error
+                return StatusCode(500, "An error occurred while updating the profile.");
+            }
+
+            return RedirectToAction("Profils");
         }
 
         // GET: Adherents/Delete/5
