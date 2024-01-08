@@ -19,78 +19,32 @@
                     </div>
                 </div>
             </div>
-             @foreach (var reservation in Model)
-            {
-                <p>@reservation.Livre.Titre;</p>
-            }
+             
             <table id="dtBasicExample" class="table table-bordered table-striped table-sm" cellspacing="0">
                 <thead>
                     <tr>
                         <th class="col-1" scope="col">#</th>
                         <th scope="col">Books name</th>
                         <th class="col-2" scope="col">Reservation date</th>
-                        <th class="col-1" scope="col">Available</th>
                         <th class="col-2" scope="col">Borrow date</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @{
+                        int i = 1; // Counter for row numbers
+                    }
+                    @foreach (var reservation in Model)
+                    {
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>Yes</td>
+                        <th scope="row">@i</th>
+                        <td>@reservation.Livre.Titre</td>
+                        <td>@reservation.DateReservation.ToString("d")</td>
                         <td>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                Launch demo modal
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-dark" id="exampleModalLabel">Borrow this book</h5>
-                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <form>
-                                            <div class="modal-body">
-                                            
-                                                <div class="mb-3">
-                                                    <label for="disabledTextInput" class="form-label">Book Title</label>
-                                                    <input type="text" id="disabledTextInput" class="form-control p-1" placeholder="book title" style="font-size:15px" disabled>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <div class="row form-date">
-                                                        <label class="col-4 form-label" for="dateBorrow">
-                                                            Borrow date
-                                                        </label>
-                                                        <input class="col-6 form-input boder boder-light" type="date" id="dateBorrow">
-                                                    </div>
-                                                </div>
-
-                                            
-                                        </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-warning" asp-controller="Adherents" asp-action="GetHTMLPageAsPdf">Borrow</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                                <a class="btn btn-warning btn-sm" asp-area="" asp-controller="Adherents" asp-action="GetHTMLPageAsPdf" asp-route-id="@reservation.ReservationID">Generer</a>
 
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    }
                 </tbody>
             </table>
         </div>

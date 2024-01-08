@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FrontOfficeApp.Data;
 using FrontOfficeApp.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Components.RenderTree;
 
 
 namespace FrontOfficeApp.Controllers
@@ -225,15 +226,55 @@ namespace FrontOfficeApp.Controllers
             return _context.Adherents.Any(e => e.AdherentID == id);
         }
 
-      public IActionResult GetHTMLPageAsPdf(long id)
+
+
+        public async Task<IActionResult> GetHTMLPageAsPdf(long id)
         {
+            var reservation = _context.Reservations
+                                     .Include(r => r.Livre)
+                                     .FirstOrDefault(r => r.ReservationID == id);
+            
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "AdherentID")?.Value;
+            if (!int.TryParse(userId, out int adherentId))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var adherent = await _context.Adherents
+                                         .FirstOrDefaultAsync(e => e.AdherentID == adherentId);
+            if (reservation == null)
+            {
+                return NotFound("Reservation not found.");
+            }
+            if (reservation.Livre == null)
+            {
+                return NotFound("Book details not found for the reservation.");
+            }
+            if (adherent == null)
+            {
+                return NotFound("User not found.");
+            }
             var Renderer = new IronPdf.ChromePdfRenderer();
-            using var PDF = Renderer.RenderHtmlAsPdf("<h1>hello</h1>");
+
+            // Create HTML content for the PDF
+            var htmlContent = $@"
+<html>
+<head>
+    <title>Reservation Details</title>
+</head>
+<body>
+    <h1>Reservation receipt</h1>
+    <p><strong>Lastname:</strong> {adherent.Nom}</p>   
+<p><strong>Firstname:</strong> {adherent.Prenom}</p>
+<p><strong>Email:</strong> {adherent.Email}</p>
+    <p><strong>Book Name:</strong> {reservation.Livre.Titre}</p>
+    <p><strong>Reservation Date:</strong> {reservation.DateReservation.ToString("d")}</p>
+</body>
+</html>";
+            using var PDF = Renderer.RenderHtmlAsPdf(htmlContent);
             var contentLength = PDF.BinaryData.Length;
             Response.Headers["Content-Length"] = contentLength.ToString();
-            Response.Headers.Add("Content-Disposition", "inline; filenale=Document_" + id + ".pdf");
+            Response.Headers.Add("Content-Disposition", "inline; filename=Reservation_" + id + ".pdf");
             return File(PDF.BinaryData, "application/pdf");
-
         }
 
 
