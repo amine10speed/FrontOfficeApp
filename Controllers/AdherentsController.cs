@@ -60,15 +60,27 @@ namespace FrontOfficeApp.Controllers
         }
 
         // GET profil BOOKS 
-        public IActionResult Profils()
+        public async Task<IActionResult> Profils()
         {
-            return View();
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "AdherentID")?.Value;
+            if (!int.TryParse(userId, out int adherentId))
+            {
+                // Gérer le cas où l'ID de l'utilisateur n'est pas trouvé ou est invalide
+                return RedirectToAction("Login", "Home");
+            }
+
+            var adherent = await _context.Adherents
+                .FirstOrDefaultAsync(e => e.AdherentID == adherentId);
+
+            if (adherent == null)
+            {
+                // Gérer le cas où l'adhérent n'est pas trouvé
+                return RedirectToAction("Login", "Home");
+            }
+
+            return View(adherent); // Passer l'adhérent à la vue
         }
 
-       
-
-
-        
 
 
 
@@ -122,11 +134,13 @@ namespace FrontOfficeApp.Controllers
         // POST: Adherents/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost , ActionName("UpdateAdherent")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AdherentID,NomUtilisateur,MotDePasse,Nom,Prenom,Adresse,Email")] Adherent adherent)
+        public async Task<IActionResult> UpdateAdherent([Bind("AdherentID,NomUtilisateur,Nom,Prenom,Adresse,Email")] Adherent adherent)
         {
-            if (id != adherent.AdherentID)
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "AdherentID")?.Value;
+
+            if (!int.TryParse(userId, out int parsedUserId) || adherent.AdherentID != parsedUserId)
             {
                 return NotFound();
             }
@@ -151,7 +165,7 @@ namespace FrontOfficeApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(adherent);
+            return View("Profils", adherent); // Make sure this view can handle the adherent model
         }
 
         // GET: Adherents/Delete/5

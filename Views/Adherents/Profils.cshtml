@@ -6,30 +6,35 @@
 <!-- body -->
 <body class="main-layout home_page">
 
-    <!-- header -->
     @Html.Partial("_Header")
-    <!-- end header -->
+
+  
     <div class="borrow mt-5">
         <div class="container">
             <div class="row">
+
                 <div class="col-md-10 offset-md-1">
                     <div class="aboutheading">
-                        <h2>Profil <strong class="black">nameOfAdherent</strong></h2>
+                        <h2>Profil <strong class="black">@Model.NomUtilisateur</strong></h2>
+                        <!-- Ajoutez ici les autres informations du profil que vous souhaitez afficher -->
                     </div>
                 </div>
             </div>
-            <form class="border">
+            <form asp-action="UpdateAdherent" asp-controller="Adherents" class="border" method="post">
+                @Html.AntiForgeryToken()
+
+                <input type="hidden" name="AdherentID" value="@Model.AdherentID" />
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="Fname" class="col-md-2 col-form-label">Firstname</label>
                         <div class="col-md-12">
-                            <input type="text" class="w-100 p-2" id="Fname" placeholder="Firstname">
+                            <input type="text" class="w-100 p-2" id="Fname" placeholder="Firstname" name="Prenom" value="@Model.Prenom">
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="Lname" class="col-md-2 col-form-label">Lastname</label>
                         <div class="col-md-12">
-                            <input type="text" class="w-100 p-2" id="Lname" placeholder="Lastname">
+                            <input type="text" class="w-100 p-2" id="Lname" placeholder="Lastname" name="Nom" value="@Model.Nom">
                         </div>
                     </div>
                 </div>
@@ -37,7 +42,7 @@
                     <div class="form-group col-md-6">
                         <label for="username" class="col-md-2 col-form-label">Username</label>
                         <div class="col-md-12">
-                            <input type="text" class="w-100 p-2" id="username" placeholder="Username">
+                            <input type="text" class="w-100 p-2" id="username" placeholder="Username" name="NomUtilisateur" value="@Model.NomUtilisateur">
                         </div>
                     </div>
                 </div>
@@ -45,7 +50,7 @@
                     <div class="form-group col-md-12">
                         <label for="email" class="col-md-2 col-form-label">Email</label>
                         <div class="col-md-12">
-                            <input type="email" class="w-100 p-2" id="email" placeholder="Email">
+                            <input type="email" class="w-100 p-2" id="email" placeholder="Email" name="Email" value="@Model.Email">
                         </div>
                     </div>
                 </div>
@@ -54,7 +59,7 @@
                     <div class="form-group col-md-12">
                         <label for="adress" class="col-md-2 col-form-label">Adress</label>
                         <div class="col-md-12">
-                            <input type="text" class="w-100 p-2" id="adress" placeholder="Adress">
+                            <input type="text" class="w-100 p-2" id="adress" placeholder="Adress" name="Adresse" value="@Model.Adresse">
                         </div>
                     </div>
                 </div>
