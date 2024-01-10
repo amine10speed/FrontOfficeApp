@@ -301,7 +301,5 @@ namespace FrontOfficeApp.Controllers
             Response.Headers.Add("Content-Disposition", "inline; filename=Reservation_" + id + ".pdf");
             return File(PDF.BinaryData, "application/pdf");
         }
-
-
     }
 }

@@ -31,7 +31,7 @@ namespace FrontOfficeApp.Controllers
             using (var client = new SmtpClient())
             {
                 client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                client.Authenticate("anouar7moussaoui@gmail.com", "syod iyco hxtm hsrx");
+                client.Authenticate("safaabatrahi7@gmail.com", "ljdy xbhw azyr dphn");
                 client.Send(message);
                 client.Disconnect(true);
             }
